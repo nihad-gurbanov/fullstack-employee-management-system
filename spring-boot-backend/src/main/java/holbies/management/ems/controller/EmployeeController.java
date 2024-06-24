@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/employees")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class EmployeeController {
     private EmployeeService employeeService;
 
@@ -29,7 +29,14 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDto);
     }
 
-    @GetMapping("/")
+//    @GetMapping("/") is mapping to /api/employees/.
+//    However, this might conflict with the @GetMapping("{id}")
+//    for fetching a single employee by ID (/api/employees/{id}).
+//    To avoid conflicts, it's better to specify a different path
+//    for fetching all employees, such as /api/employees/all
+//    or simply remove the leading slash in @GetMapping("/").
+
+    @GetMapping("")
     public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
         List<EmployeeDto> employeeDtos = employeeService.getAllEmployees();
         return ResponseEntity.ok(employeeDtos);

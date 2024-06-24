@@ -1,5 +1,7 @@
   /* eslint-disable no-unused-vars */
   import React, {useState} from 'react'
+import { createEmployee } from '../services/EmployeeService';
+import { useNavigate } from 'react-router-dom';
 
   const EmployeeComponent = () => {
 
@@ -7,12 +9,20 @@
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
 
+    const navigator = useNavigate();
+
     function saveEmployee(e) {
       e.preventDefault();
 
       const employee = {firstName, lastName, email};
 
-      console.log(employee);
+      // console.log(employee);
+
+      createEmployee(employee).then((response) => {
+        console.log(response.data);
+        navigator('/employees')
+      })
+
     }
 
     return (
@@ -22,7 +32,7 @@
             <div className='card col-md-6 offset-md-3 offset-md-3'>
               <h2 className='text-center'>Add Employee</h2>
               <div className='card-body'>
-                <form>
+                <form onSubmit={saveEmployee}>
 
                   <div className='form-group mb-2'>
                     <label className='form-label'>First Name:</label>
@@ -63,7 +73,7 @@
                     </input>
                   </div>
 
-                  <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
+                  <button className='btn btn-success' type='submit'>Submit</button>
                 </form>
               </div>
             </div>
