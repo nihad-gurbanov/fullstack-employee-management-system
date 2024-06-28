@@ -1,6 +1,6 @@
   /* eslint-disable no-unused-vars */
-  import React, {useState} from 'react'
-import { createEmployee } from '../services/EmployeeService';
+  import React, {useEffect, useState} from 'react'
+import { createEmployee, getEmployee } from '../services/EmployeeService';
 import { useNavigate, useParams } from 'react-router-dom';
 
   const EmployeeComponent = () => {
@@ -19,6 +19,18 @@ import { useNavigate, useParams } from 'react-router-dom';
     })
 
     const navigator = useNavigate();
+
+    useEffect(() => {
+      if(id) {
+        getEmployee(id).then((response) => {
+          setFirstName(response.data.firstName);
+          setLastName(response.data.lastName);
+          setEmail(response.data.email);
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+    })
 
     function saveEmployee(e) {
       e.preventDefault();
