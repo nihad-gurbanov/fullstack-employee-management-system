@@ -1,6 +1,6 @@
   /* eslint-disable no-unused-vars */
   import React, {useEffect, useState} from 'react'
-import { createEmployee, getEmployee } from '../services/EmployeeService';
+import { createEmployee, getEmployee, updateEmployee } from '../services/EmployeeService';
 import { useNavigate, useParams } from 'react-router-dom';
 
   const EmployeeComponent = () => {
@@ -30,22 +30,32 @@ import { useNavigate, useParams } from 'react-router-dom';
           console.log(error)
         })
       }
-    })
+    }, [id]);
 
-    function saveEmployee(e) {
+    function saveOrUpdateEmployee(e) {
       e.preventDefault();
 
       if (validateForm()) {
+
         const employee = {firstName, lastName, email};
         console.log(employee);
 
-      createEmployee(employee).then((response) => {
-        console.log(response.data);
-        navigator('/employees')
-      })
-
+        if(id) {
+          updateEmployee(id, employee).then((response) => {
+            console.log(response.data);
+            navigator('/employees');
+          }).catch(error => {
+              console.log(error);
+            })
+          } else {
+            createEmployee(employee).then((response) => {
+            console.log(response.data);
+            navigator('/employees')
+          }).catch(error => {
+            console.log(error);
+          })
+        }
       }
-      
     }
 
     function validateForm() {
@@ -97,7 +107,7 @@ import { useNavigate, useParams } from 'react-router-dom';
             }
 
               <div className='card-body'>
-                <form onSubmit={saveEmployee}>
+                <form onSubmit={saveOrUpdateEmployee}>
 
                   <div className='form-group mb-2'>
                     <label className='form-label'>First Name:</label>
