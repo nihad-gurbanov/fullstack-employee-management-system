@@ -7,7 +7,7 @@ const FooterComponent = () => {
   return (
     <div>
       <footer className='footer'>
-        <span>All rights reserved {currentYear}</span>
+        <span>Bütün hüquqlar qorunur {currentYear}</span>
       </footer>
     </div>
   )

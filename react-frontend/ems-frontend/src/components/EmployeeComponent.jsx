@@ -66,21 +66,21 @@ import { useNavigate, useParams } from 'react-router-dom';
       if (firstName.trim()) {
         errorsCopy.firstName = '';
       } else {
-        errorsCopy.firstName = 'First name is required';
+        errorsCopy.firstName = 'Ad sahəsi boş ola bilməz';
         valid = false;
       }
 
       if (lastName.trim()) {
         errorsCopy.lastName = '';
       } else {
-        errorsCopy.lastName = 'Last name is required';
+        errorsCopy.lastName = 'Soyad sahəsi boş ola bilməz';
         valid = false;
       }
 
       if (email.trim()) {
         errorsCopy.email = '';
       } else {
-        errorsCopy.email = 'Email name is required';
+        errorsCopy.email = 'Elektron poçt sahəsi boş ola bilməz';
         valid = false;
       }
 
@@ -90,9 +90,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 
     function pageTitle() {
       if(id) {
-        return <h2 className='text-center'>Update Employee</h2>
+        return <h2 className='text-center'>Kadr Məlumatlarını Düzəlt</h2>
       } else {
-        return <h2 className='text-center'>Add Employee</h2>
+        return <h2 className='text-center'>Kadr Əlavə Et</h2>
       }
     }
 
@@ -110,10 +110,10 @@ import { useNavigate, useParams } from 'react-router-dom';
                 <form onSubmit={saveOrUpdateEmployee}>
 
                   <div className='form-group mb-2'>
-                    <label className='form-label'>First Name:</label>
+                    <label className='form-label'>Ad:</label>
                     <input 
                     type='text'
-                    placeholder='Enter Employee First Name'
+                    placeholder='Kadrın adını daxil edin'
                     name='firstName'
                     value={firstName}
                     className={`form-control ${errors.firstName? 'is-invalid': ''}`}
@@ -126,10 +126,10 @@ import { useNavigate, useParams } from 'react-router-dom';
                   </div>
 
                   <div className='form-group mb-2'>
-                    <label className='form-label'>Last Name:</label>
+                    <label className='form-label'>Soyad:</label>
                     <input 
                     type="text"
-                    placeholder='Enter Employee Last Name'
+                    placeholder='Kadrın soyadını daxil edin'
                     name='lastName'
                     value={lastName}
                     className= {`form-control ${errors.lastName? 'is-invalid': ''}`}
@@ -142,10 +142,10 @@ import { useNavigate, useParams } from 'react-router-dom';
                   </div>
 
                   <div className='form-group mb-2'>
-                    <label className='form-label'>Email:</label>
+                    <label className='form-label'>Elektron poçt:</label>
                     <input 
                     type='text'
-                    placeholder='Enter Employee Email'
+                    placeholder='Kadrın elektron poçtunu daxil edin'
                     name="email"
                     value={email}
                     className= {`form-control ${errors.email? 'is-invalid' : ''}`}
@@ -156,7 +156,7 @@ import { useNavigate, useParams } from 'react-router-dom';
                     {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
                   </div>
 
-                  <button className='btn btn-success' type='submit'>Submit</button>
+                  <button className='btn btn-success' type='submit'>Əlavə et</button>
                 </form>
               </div>
             </div>

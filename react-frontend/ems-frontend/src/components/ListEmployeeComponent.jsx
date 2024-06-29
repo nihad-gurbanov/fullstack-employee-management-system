@@ -43,17 +43,17 @@ const ListEmployeeComponent = () => {
   }
     return (
     <div className="container">
-      <h2 className="text-center">List of Employees</h2>
-      <button className="btn btn-primary mb-2" onClick={addNewEmployee}>Add Employee</button>
+      <h2 className="text-center">Kadrların Siyahısı</h2>
+      <button className="btn btn-primary mb-2" onClick={addNewEmployee}>Yeni Kadr Əlavə Et</button>
 
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
-            <th>Employee Id</th>
-            <th>Employee First name</th>
-            <th>Employee Last name</th>
-            <th>Employee Email</th>
-            <th>Actions</th>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Elektron Poçt</th>
+            <th>Əməliyyatlar</th>
           </tr>
         </thead>
         <tbody>
@@ -65,8 +65,8 @@ const ListEmployeeComponent = () => {
                 <td>{employee.lastName}</td>
                 <td>{employee.email}</td>
                 <td>
-                  <button className="btn btn-secondary me-2" onClick={() => updateEmployee(employee.id)}>Update</button>
-                  <button className="btn btn-danger" onClick={() => removeEmployee(employee.id)}>Delete</button>
+                  <button className="btn btn-secondary me-2" onClick={() => updateEmployee(employee.id)}>Düzəlt</button>
+                  <button className="btn btn-danger" onClick={() => removeEmployee(employee.id)}>Sil</button>
                 </td>
               </tr>)
             }
