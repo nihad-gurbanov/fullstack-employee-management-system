@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect ,useState} from "react"
-import { listEmployees } from "../services/EmployeeService"
+import { deleteEmployee, listEmployees } from "../services/EmployeeService"
 import { useNavigate } from "react-router-dom"
 
 const ListEmployeeComponent = () => {
@@ -10,13 +10,17 @@ const ListEmployeeComponent = () => {
   const navigator = useNavigate();
   
   useEffect(() => {
+    getAllEmployees();
+  }, [])
+
+  function getAllEmployees() {
     listEmployees()
     .then((response) => {
       setEmployees(response.data);
     }).catch(error => {
       console.error(error);
     })
-  }, [])
+  }
   
   function addNewEmployee () {
     navigator('/add-employee')
@@ -27,6 +31,16 @@ const ListEmployeeComponent = () => {
     navigator(`/edit-employee/${id}`)
   }
 
+
+  function removeEmployee(id) {
+    console.log(id)
+
+    deleteEmployee(id).then((response) => {
+      getAllEmployees();
+    }).catch(error => {
+      console.log(error);
+    })
+  }
     return (
     <div className="container">
       <h2 className="text-center">List of Employees</h2>
@@ -51,7 +65,8 @@ const ListEmployeeComponent = () => {
                 <td>{employee.lastName}</td>
                 <td>{employee.email}</td>
                 <td>
-                  <button className="btn btn-info mb-2" onClick={() => updateEmployee(employee.id)}>Update</button>
+                  <button className="btn btn-secondary me-2" onClick={() => updateEmployee(employee.id)}>Update</button>
+                  <button className="btn btn-danger" onClick={() => removeEmployee(employee.id)}>Delete</button>
                 </td>
               </tr>)
             }
